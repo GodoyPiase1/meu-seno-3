@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>LotoGênio - Geração e Análise de Jogos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .resultado {
+            margin-top: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        ul {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>LotoGênio - Geração e Análise de Jogos</h1>
+
+    <button onclick="gerarJogo()">Gerar Combinação Estratégica</button>
+    <button onclick="analisarJogo()">Análise Estatística</button>
+    <button onclick="limparResultados()">Limpar Resultados</button>
+
+    <div class="resultado" id="resultado"></div>
+
+    <script>
+        function gerarJogo() {
+            const dezenas = [];
+            while (dezenas.length < 6) {
+                const n = Math.floor(Math.random() * 60) + 1;
+                if (!dezenas.includes(n)) dezenas.push(n);
+            }
+            dezenas.sort((a, b) => a - b);
+            document.getElementById('resultado').innerHTML =
+                '<strong>Jogo Gerado:</strong> ' + dezenas.join(', ');
+        }
+
+        function analisarJogo() {
+            const dezenas = [];
+            while (dezenas.length < 6) {
+                const n = Math.floor(Math.random() * 60) + 1;
+                if (!dezenas.includes(n)) dezenas.push(n);
+            }
+            dezenas.sort((a, b) => a - b);
+
+            let pares = dezenas.filter(d => d % 2 === 0).length;
+            let impares = 6 - pares;
+            let soma = dezenas.reduce((a, b) => a + b, 0);
+
+            document.getElementById('resultado').innerHTML =
+                '<strong>Jogo para Análise:</strong> ' + dezenas.join(', ') +
+                '<br><ul>' +
+                '<li><strong>Pares:</strong> ' + pares + '</li>' +
+                '<li><strong>Ímpares:</strong> ' + impares + '</li>' +
+                '<li><strong>Soma Total:</strong> ' + soma + '</li>' +
+                '</ul>';
+        }
+
+        function limparResultados() {
+            document.getElementById('resultado').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
